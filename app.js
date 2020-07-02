@@ -12,7 +12,22 @@ var scores,currentScore,activePlayer,diceImg;
 diceImg = document.querySelector("img");
 init();
 
+document.querySelector(".btn-roll").addEventListener('click',function(){
+    diceImg.style.display = "block";
+    var dice = Math.ceil(Math.random()*6);
+    diceImg.src = 'dice-'+dice+'.png';
+    if(dice !== 1){
+        currentScore += dice;
+        document.querySelector('#current-'+activePlayer).textContent = currentScore;
+    }else{
+        currentScore = 0;
+        document.querySelector('#current-'+activePlayer).textContent = currentScore;
+        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; 
+    }
+    
+});
 
+// fuction for setting all the scores to 0 
 function init(){
     scores = [0,0];
     currentScore = 0;
