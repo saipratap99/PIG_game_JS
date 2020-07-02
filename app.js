@@ -12,29 +12,54 @@ var scores,currentScore,activePlayer,diceImg;
 diceImg = document.querySelector("img");
 init();
 
+// rolling dice event
 document.querySelector(".btn-roll").addEventListener('click',function(){
+    // Roll the dice
     diceImg.style.display = "block";
     var dice = Math.ceil(Math.random()*6);
     diceImg.src = 'dice-'+dice+'.png';
     if(dice !== 1){
+        // if dice value not 1
+        // add the dice value to current score
         currentScore += dice;
         document.querySelector('#current-'+activePlayer).textContent = currentScore;
     }else{
-        currentScore = 0;
-        document.querySelector('#current-'+activePlayer).textContent = currentScore;
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; 
+        nextPlayer();
     }
-    
 });
+
+// Hold the current score and add to GLOBAL score
+document.querySelector(".btn-hold").addEventListener("click",function(){
+    // update the total score of current player and display it
+    scores[activePlayer] += currentScore;
+    document.getElementById('score-'+activePlayer).textContent = scores[activePlayer];
+    nextPlayer();
+})
+
+// chnage the player alternatively
+function nextPlayer(){
+    // if dice value is 1 then make currentScore of the player 0
+    currentScore = 0;
+    document.querySelector('#current-'+activePlayer).textContent = currentScore;
+    // turn the activePlayer 
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0; 
+    // toggle the active class inorder to show in document
+    document.querySelector(".player-0-panel").classList.toggle('active'); 
+    document.querySelector(".player-1-panel").classList.toggle('active');
+}
 
 // fuction for setting all the scores to 0 
 function init(){
+    // set scores to 0 and activePlayer is 1st player
     scores = [0,0];
     currentScore = 0;
     activePlayer = 0;
     diceImg.style.display = 'none';
+    // In document aldo chage the text content of the scores
     document.querySelector("#score-0").textContent = 0;
     document.querySelector("#score-1").textContent = 0;
     document.getElementById("current-0").textContent = 0;
     document.getElementById("current-1").textContent = 0;
 }
+
+
