@@ -6,3 +6,20 @@ GAME RULES:
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game
 */
+
+// declare score vraibales and activePlayer variable
+var scores,currentScore,activePlayer,diceImg;
+diceImg = document.querySelector("img");
+init();
+
+
+function init(){
+    scores = [0,0];
+    currentScore = 0;
+    activePlayer = 0;
+    diceImg.style.display = 'none';
+    document.querySelector("#score-0").textContent = 0;
+    document.querySelector("#score-1").textContent = 0;
+    document.getElementById("current-0").textContent = 0;
+    document.getElementById("current-1").textContent = 0;
+}
