@@ -49,6 +49,10 @@ document.querySelector(".btn-hold").addEventListener("click",function(){
     }
 });
 
+// New game event
+ 
+document.querySelector(".btn-new").addEventListener("click",init);
+
 // chnage the player alternatively
 function nextPlayer(){
     // if dice value is 1 then make currentScore of the player 0
