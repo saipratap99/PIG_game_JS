@@ -8,9 +8,15 @@ GAME RULES:
 */
 
 // declare score vraibales and activePlayer variable
-var scores,currentScore,activePlayer,diceImg,playGame;
+var scores,currentScore,activePlayer,diceImg,playGame,player,winningScore;
 diceImg = document.querySelector("img");
 init();
+for (let i = 0; i < 2; i++) {
+    player = prompt("Enter Player "+ (i+1) +" name:");
+    document.querySelector("#name-"+i).textContent = player;
+}
+
+winningScore = prompt("Enter winnig score:");
 
 // rolling dice event
 document.querySelector(".btn-roll").addEventListener('click',function(){
@@ -37,7 +43,7 @@ document.querySelector(".btn-hold").addEventListener("click",function(){
         scores[activePlayer] += currentScore;
         document.getElementById('score-'+activePlayer).textContent = scores[activePlayer];
         // declare winner
-        if(scores[activePlayer] >= 20){
+        if(scores[activePlayer] >= winningScore){
             document.querySelector("#name-"+activePlayer).textContent = "WINNER!";
             document.querySelector(".player-"+activePlayer+"-panel").classList.add("winner");
             diceImg.style.display = "none";
@@ -50,7 +56,10 @@ document.querySelector(".btn-hold").addEventListener("click",function(){
 });
 
 // New game event
- 
+/**********************************************************************************
+ shoild use init only not init() as it will call even func without occurence of event
+ *********************************************************************************/ 
+
 document.querySelector(".btn-new").addEventListener("click",init);
 
 // chnage the player alternatively
